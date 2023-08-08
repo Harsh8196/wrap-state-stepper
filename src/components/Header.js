@@ -9,6 +9,8 @@ const Header = () => {
     useEffect(() => {
         if(localStorage.getItem("selectedNetworks")){
             setNetworks(localStorage.getItem("selectedNetworks"));
+        } else{
+            localStorage.setItem("selectedNetworks",'Mainnet');
         }
     }, [])
 
