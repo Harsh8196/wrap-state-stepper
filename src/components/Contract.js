@@ -54,6 +54,8 @@ const Contract = () => {
         setCurrentState(cachedState.state)
         if (cachedState.errorMessages) {
           setError(cachedState.errorMessages)
+        }else{
+          setError('No Error')
         }
       }
   }
