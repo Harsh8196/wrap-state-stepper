@@ -30,7 +30,11 @@ const Header = () => {
                 navigate(`/contract/${searchText}`)
             }else if(result[0].type === "interaction") {
                 setSearch('')
-                navigate(`/interaction/${searchText}`)
+                const tags = result[0].interaction.tags
+                //console.log(tags,'tags')
+                const contract_id = tags.filter(t => {return t.name === 'Contract'})
+                //console.log(contract_id,'contract_id')
+                navigate(`/contract/${contract_id[0].value}/${searchText}`)
             }
         }else if(network === "Testnet"){
             try{
@@ -39,8 +43,10 @@ const Header = () => {
                 setSearch('')
                 navigate(`/contract/${searchText}`)
             }catch(e){
+                const response = await fetch(`https://gateway.warp.cc/gateway/interactions/${searchText}`);
+                const result = await response.json();
                 setSearch('')
-                navigate(`/interaction/${searchText}`)
+                navigate(`/contract/${result.contractid}/${searchText}`)
             }
         }
     }
